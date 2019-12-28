@@ -1,20 +1,35 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const cookieSession = require('cookie-session');
 
-// set the port of our application
-// process.env.PORT lets the port be set by Heroku
-var port = process.env.PORT || 8080;
+const app = express();
 
-// set the view engine to ejs
-app.set('view engine', 'pug');
+const TWO_HOURS = 1000 * 60 * 60 * 2;
 
-// make express look in the public directory for assets (css/js/img)
+const home = require('./routes/home');
+const users = require('./routes/users');
+
+app.use(cookieSession({
+    name: 'session',
+    keys: ['s!M#cUUHXW67b#t'],
+    maxAge: TWO_HOURS
+}))
+
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(__dirname + '/public'));
+app.set('view engine', 'pug');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use('/', home);
+app.use('/users', users);
+
+// heroku requires port to be served to 8080
+var port = process.env.PORT || 8080;
 
 // set the home page route
 app.get('/', function(req, res) {
-
-	// ejs render automatically looks in the views folder
 	res.render('index');
 });
 

@@ -10,7 +10,7 @@ block content
                 a(href="/myprofile")
                     img(src=data.url).user-image.home-image
                 h3.home-user-name #{ data.firstName + " " + data.lastName }
-                p.home-user-bio Some kind of bio about the person here
+                p.home-user-bio #{ data.bio }
                 //- Add in the links for anchors here
                 .home-user-clickables
                     ul.home-user-info.no-style-list
@@ -39,85 +39,21 @@ block content
                             button.home-question-type.question-button #{ post.tag }
                         p.home-question-content #{ post.message }
                         p.home-question-date.flex-container-horz #{ post.date }
-                            a.home-question-replies-button(onclick="showReplies(this)") #{ post.replyCount}
+                            a.home-question-replies-button(onclick="showReplies(this)") #{ post.replies.length} replies
                         //-     This is what shows on replies click
                         .home-question-replies.flex-container-vert.hidden
                             //- Injecting replies STARTS here
                             each reply in post.replies
                                 .home-question-replies-reply.flex-container-horz
                                     .reply-img-container
-                                        img(src="https://www.w3schools.com/w3images/avatar3.png", alt="").reply-image
+                                        img(src=reply.userImage, alt="").reply-image
                                     .reply-textcontent-container
-                                        p.reply-textcontent #{ reply.commentMessage }
+                                        p.reply-textcontent #{ reply.message }
+                                .reply-date-container
+                                    p.reply-date #{reply.commentDate.toISOString().substring(0, 10)}
                             //- Injecting replies ENDS here
                             .home-questions-replies-inputs.flex-container-vert
-                                textarea(cols="40", rows="5" placeholder="add your reply...").reply-input-content
-                                input(type="submit", value="comment").reply-input-submit.button
-
-
-
-
-                    
-                    //-p=post.subject
-                    //-p=post.message
-                    //-p=post.date
-                    //-p=post.tag
-                    //-p=post.replyCount
-
-
-
-//-.home-question.flex-container-horz
-            .home-question-left
-                img(src="https://www.w3schools.com/w3images/avatar2.png", alt="").question-image
-            .home-question-right
-                p.home-question-title.flex-container-horz Question title    
-                    button.home-question-type.question-button zend
-                p.home-question-content This is me asking a question but it's not an actual question because this is just placeholder text and why are you still reading this lol ok bye thanks?
-                p.home-question-date.flex-container-horz 11 sep 2019
-                    a.home-question-replies-button(onclick="showReplies(this)") 2 replies
-                //- This is what shows on replies click
-                .home-question-replies.flex-container-vert.hidden
-                    //- Injecting replies STARTS here
-                    .home-question-replies-reply.flex-container-horz
-                        .reply-img-container
-                            img(src="https://www.w3schools.com/w3images/avatar3.png", alt="").reply-image
-                        .reply-textcontent-container
-                            p.reply-textcontent Yes this is me replying to your question, quite a nice question if I do say so myself mhmm, yes ok nice goodbye.
-                    .home-question-replies-reply.flex-container-horz
-                        .reply-img-container
-                            img(src="https://www.w3schools.com/w3images/avatar4.png", alt="").reply-image
-                        .reply-textcontent-container
-                            p.reply-textcontent Yes this is me replying to your question, quite a nice question if I do say so myself mhmm, yes ok nice goodbye.
-                    //- Injecting replies ENDS here
-                    .home-questions-replies-inputs.flex-container-vert
-                        textarea(cols="40", rows="5" placeholder="add your reply...").reply-input-content
-                        input(type="submit", value="comment").reply-input-submit.button
-
-
-//- block content
-    include header.pug
-    p hello world, welcome to the myprofile page
-    ul float left div
-        img(src=data.url id="profilePic")
-        li= data.lastName
-        li= data.email
-        li= data.bio
-        li= data.country
-        li= data.dob
-        li= data.likes
-        li= data.posts
-        li image, name, description
-        li posts/messages/likes counts (clicking posts)
-        li edit profile (links to edit profile page or pop up form?)
-        li not mentioned in assignment, but presumably need a page to see all messages sent and received
-    ul float right div
-        li most recent(?) posts
-    
-    each post in posts
-        div.post
-            p=post.subject
-            p=post.message
-            p=post.date
-            p=post.tag
-            p=post.replyCount
-
+                                form(method="POST", action='/questions/addComment')
+                                    input(type="text" value=post.postID name="postID").hidden
+                                    textarea(cols="40", rows="5" placeholder="add your reply..." name="comment").reply-input-content
+                                    input(type="submit", value="comment").reply-input-submit.button

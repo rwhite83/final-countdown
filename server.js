@@ -30,9 +30,11 @@ app.use('/users', users);
 app.use('/messages', messages);
 app.use('/questions', questions);
 
-console.log('server launched on port 80 for heroku')
-app.set('port', process.env.PORT || 80);
-
+console.log('server passed to heroku on port 8080')
+var port = process.env.PORT || 8080;
+app.listen(port, function() {
+	console.log('Our app is running on http://localhost:' + port);
+});
 
 /// Adding tables to the data base.. useful functions:
 
@@ -136,6 +138,7 @@ app.get('/createUserCommentTable', (req, res) => {
   let sql = 'CREATE TABLE userComment(commentID int AUTO_INCREMENT'
       + ', postID int'
       + ', userID int'
+      + ', userImage VARCHAR(255)'
       + ', message VARCHAR(255)'
       + ', postDate DATE'
       + ', FOREIGN KEY(userID) REFERENCES userProfile(userID)'
@@ -150,23 +153,24 @@ app.get('/createUserCommentTable', (req, res) => {
 });
 
 // Insert Comment
-app.get('/addComment', (req,res) => {
-  // dummy data
-  let now = new Date();
-  let comment = {
-      userID: '4',
-      postID: '1',
-      message: 'A constructor in Java is a special method that is used to initialize objects. The constructor is called when an object of a class is created.',
-      postDate: now
-  };
-  let sql = 'INSERT INTO userComment SET ?';
-  // The question mark from line 61 is a placeholder for the second argument of the query function
-  pool.query(sql, comment, (err, result) => {
-      if(err) throw err;
-      console.log(result);
-      res.send('Comment added...');
-  })
-});
+// app.get('/addComment', (req,res) => {
+//   // dummy data
+//   let now = new Date();
+//   let comment = {
+//       userID: '16',
+//       postID: '1',
+//       userImage: 'https://i.kym-cdn.com/photos/images/newsfeed/000/989/018/3e9.png',
+//       message: 'Zora is created.',
+//       postDate: now
+//   };
+//   let sql = 'INSERT INTO userComment SET ?';
+//   // The question mark from line 61 is a placeholder for the second argument of the query function
+//   pool.query(sql, comment, (err, result) => {
+//       if(err) throw err;
+//       console.log(result);
+//       res.send('Comment added...');
+//   })
+// });
 
 // Drop userComment Table mysql2
 app.get('/dropUserCommentTable', (req, res) => {

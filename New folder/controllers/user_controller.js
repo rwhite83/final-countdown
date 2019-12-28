@@ -24,12 +24,11 @@ exports.login_user = (req, res) => {
             // assuming user exists and password matches...
             cookieSession.userID = result[0].userID;
             cookieSession.userEmail = result[0].userEmail;
-            cookieSession.userImageURL = result[0].userImageURL;
             console.log('session userId now: ' + cookieSession.userID);
             console.log('session userEmail now: ' + cookieSession.userEmail);
             let id = cookieSession.userID;
             console.log(id);
-                res.redirect('/home');
+                res.redirect('/home')
         }
     })
 };
@@ -80,45 +79,64 @@ exports.getUser = (req,res,next) => {
     });
 }
 
-// exports.getUserProfile = (req, res, next) =>{
-//     id = req.session.userID;
-//     let posts = [];
-//     let postsLewis = [];
-//     let repliesLewis = [];
-//     let image;
-//     model.getuserprofile(function(results) {
+exports.getUserProfile = (req, res, next) =>{
+    id = req.session.userID;
+    let posts = [];
+    let postsLewis = [];
+    let repliesLewis = [];
+    let image;
+    model.getuserprofile(function(results) {
+        let post_array = [];
+        image = results[0].post.userImageURL
+        let user = {
+            'firstName': results[0].post.userFirstName,
+            'lastName': results[0].post.userLastName,
+            'email': results[0].post.userEmail,
+            'bio': results[0].post.userBio,
+            'url': results[0].post.userImageURL,
+            'country': results[0].post.userCountry,
+            'dob': results[0].post.userDOB,
+            'likes': results[0].post.userLikeCount,
+            'postsCount': results[0].post.userPostCount
+        }
+        results.forEach(resultPost => {
+            console.log("RESULT!");
+            console.log(resultPost);
+            // let postID = resultPost.postID;
+            // let joined_return = [];
+            // let replies = [];
+            let post = {
+                'subject': resultPost.post.subject,
+                'message': resultPost.post.message,
+                'date': resultPost.post.postDate,
+                'replyCount': resultPost.post.replyCount,
+                'tag': resultPost.post.tag,    
+                'img' : image,
+                'replies' : resultPost.replies
+            }
 
-//         let post_array = [];
-//         image = results[0].post.userImageURL
-//         let user = {
-//             'firstName': results[0].post.userFirstName,
-//             'lastName': results[0].post.userLastName,
-//             'email': results[0].post.userEmail,
-//             'bio': results[0].post.userBio,
-//             'url': results[0].post.userImageURL,
-//             'country': results[0].post.userCountry,
-//             'dob': results[0].post.userDOB,
-//             'likes': results[0].post.userLikeCount,
-//             'postsCount': results[0].post.userPostCount
-//         }
-//         results.forEach(resultPost => {
-//             let post = {
-//                 'subject': resultPost.post.subject,
-//                 'message': resultPost.post.message,
-//                 'date': resultPost.post.postDate,
-//                 'replyCount': resultPost.post.replyCount,
-//                 'tag': resultPost.post.tag,    
-//                 'img' : image,
-//                 'replies' : resultPost.replies
-//             }
-
-//             postsLewis.push(post);
-//         });
-//         setTimeout(() =>{
-//             res.render('myprofile', { "data": user , "posts": posts, "postsLewis": postsLewis} );
-//         }, 500);
-//     });
-// }
+            console.log("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+            console.log(post);
+            postsLewis.push(post);
+            // model.getreplies(postID, function (results) {
+            //    results.forEach(result =>{
+            //         let reply = {
+            //             'message': result.commentMessage,
+            //         }
+            //         console.log("results from getReplies:"  + result.commentMessage);
+            //         replies.push(reply)
+            //         console.log("reply from getReplies: ");
+            //         console.log("THIS IS THE REPLY: ");
+            //         console.log(reply);
+            //         repliesLewis.push(reply);
+            //    })
+            // })
+        });
+        setTimeout(() =>{
+            res.render('myprofile', { "data": user , "posts": posts, "postsLewis": postsLewis} );
+        }, 500);
+    });
+}
 
 exports.getHome = (req, res, next) =>{
     id = req.session.userID;
@@ -136,24 +154,42 @@ exports.getHome = (req, res, next) =>{
             'bio': results[0].post.userBio,
             'url': results[0].post.userImageURL,
             'country': results[0].post.userCountry,
-            'dob': results[0].post.userDOB.toISOString().substring(0, 10),
+            'dob': results[0].post.userDOB,
             'likes': results[0].post.userLikeCount,
             'postsCount': results[0].post.userPostCount
         }
         results.forEach(resultPost => {
-            console.log("CHECKING HERE PLEASE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-            console.log(resultPost)
+            console.log("RESULT!");
+            console.log(resultPost);
+            // let postID = resultPost.postID;
+            // let joined_return = [];
+            // let replies = [];
             let post = {
-                'postID' : resultPost.post.postID,
                 'subject': resultPost.post.subject,
                 'message': resultPost.post.message,
-                'date': resultPost.post.postDate.toISOString().substring(0, 10),
+                'date': resultPost.post.postDate,
                 'replyCount': resultPost.post.replyCount,
                 'tag': resultPost.post.tag,    
                 'img' : image,
                 'replies' : resultPost.replies
             }
+
+            console.log("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+            console.log(post);
             postsLewis.push(post);
+            // model.getreplies(postID, function (results) {
+            //    results.forEach(result =>{
+            //         let reply = {
+            //             'message': result.commentMessage,
+            //         }
+            //         console.log("results from getReplies:"  + result.commentMessage);
+            //         replies.push(reply)
+            //         console.log("reply from getReplies: ");
+            //         console.log("THIS IS THE REPLY: ");
+            //         console.log(reply);
+            //         repliesLewis.push(reply);
+            //    })
+            // })
         });
         setTimeout(() =>{
             res.render('myprofile', { "data": user , "posts": posts, "postsLewis": postsLewis} );
@@ -163,6 +199,7 @@ exports.getHome = (req, res, next) =>{
 
 exports.populateEditProfile = (req, res, next) =>{
     id = req.session.userID;
+    console.log(id);
     model.getjustprofile(function(results) {
         let user = {
             'firstName': results[0].userFirstName,

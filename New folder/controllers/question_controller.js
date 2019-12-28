@@ -1,5 +1,4 @@
 const model = require('../models/knowledge_base_model');
-const cookieSession = require('cookie-session');
 
 exports.post_question = (req, res) => {
     console.log('post question fired from question controller');
@@ -30,18 +29,6 @@ exports.find_questions = (req, res) => {
     // query question_model (database) from here and return results
     res.end();
 };
-
-exports.add_comment = (req, res) => {
-    console.log('add comment fired from question controller');
-    let commentMessage = req.body.comment;
-    // let postID = req.body.postID;
-
-    // console.log("THIS IS THE POST ID")
-    // console.log("here: " + postID)
-
-    model.addcomment(req.body);
-        res.redirect('/home');
-}
 
 exports.search = (req, res) => {
     console.log('search fired from question controller');

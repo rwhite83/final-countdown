@@ -17,9 +17,11 @@ router.get('/question', function (req, res) {
 router.get('/search-results', function (req, res) {
     if (typeof cookieSession.userID === 'undefined'
         || cookieSession.userID == '') {
+        console.log("undefined: " + cookieSession.userID);
         res.render('signup');
     }
     else {
+        console.log("defined: " + cookieSession.userID);
         res.render('search-results');
     }
 });
@@ -27,8 +29,6 @@ router.get('/search-results', function (req, res) {
 router.post('/search', question_controller.search)
 
 router.post('/postquestion', question_controller.post_question);
-
-router.post('/addComment', question_controller.add_comment);
 
 router.get('/getuserquestions', question_controller.get_user_questions);
 

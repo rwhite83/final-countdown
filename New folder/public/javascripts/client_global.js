@@ -1,11 +1,11 @@
 /*SIGNUP PAGE*/
 
 // Hide the first step/login inputs in header then reveal second step
-// showSecondStep = () =>{
-//     document.getElementById("navbar-login-inputs").classList.add("hidden");
-//     document.getElementById("signup-stepone").classList.add("hidden");
-//     document.getElementById("signup-steptwo").classList.remove("hidden")
-// }
+showSecondStep = () =>{
+    document.getElementById("navbar-login-inputs").classList.add("hidden");
+    document.getElementById("signup-stepone").classList.add("hidden");
+    document.getElementById("signup-steptwo").classList.remove("hidden")
+}
 
 /* HOME PAGE */
 

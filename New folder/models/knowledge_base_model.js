@@ -1,4 +1,4 @@
-const db = require('../utilities/databaseMySQL2');
+const db = require('../utilities/db_access');
 const mysql = require('mysql');
 const cookieSession = require('cookie-session');
 
@@ -164,29 +164,7 @@ function postQuestion(data) {
     db.query(sql, post, (err, result) =>{
         console.log(err);
         if(err) throw err;
-    });
-}
-
-function addComment(data) {
-    let id = cookieSession.userID;
-    let img = cookieSession.userImageURL;
-    let date = new Date();
-    let year = date.getFullYear();
-    let month = date.getMonth();
-    let day = date.getUTCDay();
-    let sqlDate = "" + year + "-" + month + "-" + day;
-    let comment = {
-        'postID' : data.postID,
-        'userID' : id,
-        'userImage' : img,
-        'commentDate' : sqlDate,
-        'message' : data.comment
-    }
-
-    let sql = "INSERT INTO userComment SET ?"
-    db.query(sql, comment, (err, result) =>{
-        console.log(err);
-        if(err) throw err;
+        console.log("Lewis is barking from signup user model: " + result);
     });
 }
 
@@ -201,6 +179,5 @@ module.exports = {
     getallmessages: getAllMessages,
     gettargetmessages: getTargetMessages,
     searchposts: searchPosts,
-    postquestion: postQuestion,
-    addcomment: addComment
+    postquestion: postQuestion
 }

@@ -1,0 +1,534 @@
+@font-face {
+    font-family: "roboto";
+    src: url('../fonts/roboto-condensed.ttf');
+}
+
+body {
+    font-family: "roboto";
+}
+
+a{
+    color: grey;
+    text-decoration: none;
+    border-bottom: 1px solid rgb(0, 162, 232);
+}
+
+/* Re usable stuff */
+
+.user-image{
+    border-radius: 50%;
+}
+
+.no-style-list{
+    list-style-type: none;
+}
+
+
+/* I'm not sure how segratating css for pug works... putting it here for now. */
+
+
+/* HEADER CSS */
+.header input[type="text"]{
+    border: 1px solid lightgrey;
+    height: 40px;
+}
+
+.header{
+    margin-bottom: 100px;
+    height: 50px;
+}
+
+.header-left{
+    height: 50px;
+}
+
+.header * {
+    display: inline;
+}
+
+.header-logo{
+    margin-right: 20px;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.input-search{
+    background-color: rgb(230, 230, 230);
+    font-weight: bold;
+    padding-left: 30px;
+}
+
+.header-button-logout{
+    width: 100px;
+    text-align: left;
+}
+
+/* Signup CSS and signup2 CSS */
+.signup input{
+    border: 1px solid lightgrey;
+    height: 40px;
+}
+
+.navbar input{
+    border: 1px solid lightgrey;
+    height: 40px;
+}
+
+/* flex container vert and horz can be applied to anything with divs in it that need to be flexed */
+.flex-container-vert{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.flex-container-horz{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex-container-vert-ns{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-container-horz-ns{
+    display: flex;
+    flex-direction: row;
+}
+
+.button{
+    background-color: rgb(0, 162, 232);
+    color: white;
+    height: 44px;
+    border: 1px solid rgb(0, 162, 232);
+    box-shadow: none;
+    /* border-radius: 0px; */
+}
+
+.button:hover{
+    background-color: white;
+    color: rgb(0, 162, 232);
+    border: 1px solid rgb(0, 162, 232);
+}
+
+.buttonAlt{
+    background-color: white;
+    color: rgb(0, 162, 232);
+    height: 44px;
+    border: 1px solid rgb(0, 162, 232);
+    box-shadow: none;
+    /* border-radius: 0px; */
+}
+
+.buttonAlt:hover{
+    background-color: rgb(0, 162, 232);
+    color: white;
+    border: 1px solid rgb(0, 162, 232);
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+.navbar{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: block;
+}
+
+.navbar * {
+    display: inline;
+}
+
+/* Text logo */
+.text-logo{
+    margin-left: 20px;
+    font-size: 3em;
+}
+
+.text-logo-base{
+    color: rgb(2, 156, 234);
+}
+
+/* inputs */
+.navbar-right{
+    margin-right: 20px;
+}
+
+.navbar-right *{
+    margin-left: 10px;
+}
+
+.navbar-right input{
+    /* border: 1px solid lightgrey; */
+    padding-left: 10px;
+    width: 150px;
+    /* height: 25px; */
+}
+
+.navbar-right button{
+    /* color: white;
+    background-color: rgb(0, 162, 232); */
+    border: 0;
+    box-shadow: none;
+    border-radius: 0px;
+}
+
+/* content of signup page */
+
+.signup-content{
+    margin:0 auto;
+    margin-top: 100px;
+    min-width: 1200px;
+    width: 1200px;
+}
+
+.signup-content-img{
+    height: 500px;
+    width: 500px;
+}
+
+.signup-content-right{
+    width: 500px;
+}
+
+.signup-content-inputs{
+    width: 400px;
+    height:300px;
+}
+
+.signup-content-slogan{
+    font-size: 3em;
+    margin-top: 0;
+}
+
+.signup-content-name input{
+    width: 48%;
+}
+
+/* CSS for second step in signup */
+.hidden{
+    display: none;
+}
+
+/* just to shrink down a div lol */
+.squeeze-slogan{
+    width: 200px;
+    min-width: 200px;
+}
+
+.squeeze-content{
+    width: 800px;
+    min-width: 800px;
+}
+
+
+/* myprofile and home CSS */
+.home-content{
+    width: 1200px;
+    margin:0 auto;
+    color: grey;
+}
+
+/* Left */
+.home-content-left{
+    width: 500px;
+    text-align: center;
+}
+
+.home-user-preview *{
+    margin: 0;
+}
+
+.home-image{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.home-user-name{
+    margin-top: 20px;
+    font-size: 1.3em;
+    color: black;
+    margin-bottom: 5px;
+}
+
+.home-user-clickables{
+    margin-top: 20px;
+}
+
+.home-user-info{
+    padding-left: 0;
+    text-align: left;
+    margin: 0 auto;
+    width: 130px;
+}
+
+.home-user-edit{
+    margin-top: 20px;
+}
+/* Right */
+.home-content-right{
+    margin-right: 100px;
+    height: auto;
+}
+
+.home-allposts-title{
+    margin-top: 0;
+    color: black;
+}
+
+/* Question */
+
+.home-question{
+    width: 600px;
+}
+
+.home-question-left{
+    margin-right: 20px;
+}
+
+.home-question-title{
+    font-size: 1.2em;
+}
+
+.question-button{
+    background-color: white;
+    color: rgb(0, 162, 232);
+    height: 30px;
+    width: 60px;
+    border: 1px solid rgb(0, 162, 232);
+    box-shadow: none;
+    text-align: left;
+    /* border-radius: 0px; */
+}
+
+.question-button:hover{
+    background-color: rgb(0, 162, 232);
+    color: white;
+    border: 1px solid rgb(0, 162, 232);
+}
+
+.question-image{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.reply-image{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.reply-textcontent{
+    margin-left: 20px;
+}
+
+.home-question-replies{
+    height: auto;
+}
+
+.home-question-replies-reply{
+    width: 400px;
+}
+
+.home-questions-replies-inputs{
+    height: 120px;
+}
+
+.reply-input-content{
+    width: 390px;
+    align-self: flex-end;
+}
+
+.reply-input-submit{
+    width: 100px;
+    height: 30px;
+    align-self: flex-end;
+}
+
+/* home specific CSS */
+.home-content-newpost-inputs{
+    width: 300px;
+    height: 170px;
+}
+
+/* Inputs for posting */
+
+.home-content-input-topics {
+    background-color: white;
+    color: rgb(0, 162, 232);
+    height: 44px;
+    width: 190px;
+    border: 1px solid rgb(0, 162, 232);
+    box-shadow: none;
+}
+
+.home-content-input-topics-container {
+    position: relative;
+    display: inline-block;
+}
+
+.home-content-input-topics-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.home-content-input-topics-content a {
+    color:rgb(0, 162, 232);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.home-content-input-postbutton{
+    background-color: white;
+    color: rgb(0, 162, 232);
+    height: 44px;
+    border: 1px solid rgb(0, 162, 232);
+    box-shadow: none;
+}
+
+.home-content-input-postbutton:hover{
+    background-color: rgb(0, 162, 232);
+    color: white;
+    border: 1px solid rgb(0, 162, 232);
+}
+  
+.home-content-input-topics-content a:hover {
+    background-color: #ddd;
+}
+
+.home-content-input-topics-container:hover .home-content-input-topics-content {
+    display: block;
+}
+
+.home-content-input-topics-container:hover .home-content-input-topics {
+    background-color: rgb(0, 162, 232);
+    color: white;
+    border: 1px solid rgb(0, 162, 232);
+}
+
+.home-content-input-topics.isclicked{
+    background-color: rgb(0, 162, 232);
+    color: white;
+    border: 1px solid rgb(0, 162, 232);
+}
+
+/* Search, uses a lot of css from newpost */
+.home-content-inputs-search{
+    margin-top: 20px;
+    width: 350px;
+}
+
+.home-content-input-gobutton{
+    background-color: rgb(0, 162, 232);
+    color: white;
+    height: 44px;
+    border: 1px solid rgb(0, 162, 232);
+}
+
+.home-content-input-gobutton:hover{
+    background-color: white;
+    color: rgb(0, 162, 232);
+    height: 44px;
+    border: 1px solid rgb(0, 162, 232);
+    box-shadow: none;
+}
+
+/* Messages */
+
+.messages{
+    width: 1050px;
+    margin: 0 auto;
+}
+
+/*chat heads*/
+.messages-chats{
+    height: 700px;
+    border: 1px solid lightgrey;
+}
+
+.messages-chat-info{
+    margin-top: 10px;
+}
+
+.messages-chat{
+    padding: 10px;
+    width: 300px;
+}
+
+.chat-head-image{
+    height: 80px;
+    width: 80px;
+}
+
+.messages-chat-info p{
+    margin-left: 10px;
+    margin-top: 0;
+}
+
+.chat-name{
+    margin-bottom: 0;
+    font-size: 1.2em;
+}
+
+.chat-clicked{
+    background-color: rgb(240, 240, 240);
+}
+
+.messages-chat:hover{
+    background-color: rgb(240, 240, 240);
+}
+
+/* chatbox */
+.messages-chatbox{
+    width: 700px;
+    height: 700px;
+    border: 1px solid lightgrey;
+}
+
+.chatbox-image{
+    height: 40px;
+    width: 40px;
+}
+
+/* Inputs area at bottom of chatbox */
+
+.messages-chatbox-inputs-textarea{
+    border: 1px solid lightgrey;
+}
+
+.message-input{
+    width: 99%;
+    height: 100px;
+    border:none;
+}
+
+.messages-chatbox-inputs-sendarea{
+    background-color: rgb(240, 240, 240);
+    text-align: right;
+}
+
+.send-input{
+    height: 30px;
+}
+
+#profilePic{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+}

@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    include header.pug
+    form(method="POST", action='/users/update-user/')
+        #signup-stepone.signup-content-firststep
+            .signup-content.flex-container-horz
+                .signup-content-left
+                    img(src="https://i.ibb.co/TLnFXX0/vector-knowledge.jpg").signup-content-img
+                .signup-content-right
+                    p.signup-content-slogan Change your profile
+                    .signup-content-inputs.flex-container-vert
+                        .signup-content-name.flex-container-horz
+                            input(type="text" placeholder="First Name" required="" name="firstname" value=data.firstName).signup-content-fname  
+                            input(type="text" placeholder="Last Name" required="" name="lastname" value=data.lastName).signup-content-lname
+                        input(type="text" placeholder="Email" required="" name="email" value=data.email).signup-content-email
+                        input(type="text" placeholder="Image URL" required="" name="url" value=data.url).signup-content-imageurl
+                        input(type="text" placeholder="A Few Lines About Yourself ..." required="" name="about" value=data.bio).signup-content-info
+                        input(type="text" placeholder="Country" required="" name="country" value=data.country).signup-content-country
+                        input(type="date" required="" name="dob" value=data.dob).signup-content-dob
+                        input(type="submit" value="Complete Registration").signup-content-button.buttonAl

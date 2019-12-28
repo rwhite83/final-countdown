@@ -30,8 +30,8 @@ app.use('/users', users);
 app.use('/messages', messages);
 app.use('/questions', questions);
 
-console.log('server launched on port 80')
-app.listen(80);
+console.log('server launched on port 80 for heroku')
+app.set('port', process.env.PORT || 80);
 
 
 /// Adding tables to the data base.. useful functions:

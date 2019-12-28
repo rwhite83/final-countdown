@@ -1,4 +1,4 @@
-const db = require('../utilities/databaseMySQL2');
+const db = require('../utilities/db_access');
 const mysql = require('mysql');
 const cookieSession = require('cookie-session');
 

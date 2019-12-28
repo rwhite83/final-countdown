@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    include header.pug
+    .home-content-right
+        h1.home-allposts-title All posts
+        //- His instructions are kinda unclear, is this supposed to show on click?
+        //- What should it look like before the click?  
+            each post in posts
+        each post in posts
+            div.post.home-question.flex-container-horz
+                div.home-question-left
+                    img(src=post.img).question-image
+                .home-question-right
+                    p.home-question-title.flex-container-horz Post Title
+                        button.home-question-type.question-button #{ post.subject }
+                    p.home-question-content #{ post.message }
+                    p.home-question-date.flex-container-horz #{ post.date }
+                        a.home-question-replies-button(onclick="showReplies(this)") #{ post.replyCount}

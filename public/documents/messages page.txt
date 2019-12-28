@@ -1,0 +1,7 @@
+query database for all users i have a message history with
+procedurally generate divs for all such users
+have each one wrapped in a form which on click submits a get request 
+	for full message history with that user
+procedurally populate messages on the right
+post message to database
+	live refresh on message send/receive is ridiculous to attempt at this point

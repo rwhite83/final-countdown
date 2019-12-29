@@ -1,0 +1,28 @@
+@font-face {
+    font-family: "digital-clock-font";
+    src: url('../fonts/alarm-clock.ttf')
+}
+
+body {
+    background-color: black
+}
+p {
+    color: red;
+    text-align: center;
+}
+h1 {
+    color: white;
+    text-align: center;
+    font-size: 600%;
+}
+h2 {
+    color: lightseagreen;
+    text-align: center;
+    font-size: 200%;
+}
+h3 {
+    color: red;
+    text-align: center;
+    font-size: 600%;
+    font-family: 'digital-clock-font';
+}

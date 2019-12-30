@@ -2,25 +2,9 @@ extends layout
 
 block content
     include header.pug
-    p
-    h1
-        | TECHNICAL PROGRAMMING
-        br
-        | COUNT DOWNS
-    p
-    p
-    h2 HCI Quiz
-    p
-    h3
-        p#hci_quiz 00:00:00:00
-    p
-    h2 Milestone 1 Due
-    p
-    h3
-        p(id='Milestone 1 Due') 00:00:00:00
-    p
-    h2 Final Submission for Term Game Project
-    p
-    h3
-        p(id='Final Submission for Term Game Project') 00:00:00:00
-    
+    p #{ messageData }
+        form(method="POST" action='/entries/add_entry')
+            input(type='text' placeholder="entry name" name="new_entry_name" required="")
+            input(type='datetime-local' name="new_entry_date" required="")
+            input(type="submit" value="Add Entry")
+    h1 FINAL COUNTDOWN

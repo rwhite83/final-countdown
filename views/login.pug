@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    include header.pug
+    p #{ messageData }
     form(method="POST" action='/users/login')
         input(type='text' placeholder="email" name="email_attempt" required="")
         input(type='password' placeholder="password" name="password_attempt" required="")

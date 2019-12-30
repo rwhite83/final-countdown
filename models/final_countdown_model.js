@@ -1,4 +1,5 @@
 const db = require('../utilities/final_countdown_db_access');
+const cookieSession = require('cookie-session');
 
 function login(data, callback) {
     console.log('login fired from model');
@@ -35,8 +36,25 @@ function signup(data) {
     });
 }
 
+function add(data, email, callback) {
+    console.log(email)
+    let entry = {
+        entryId: null,
+        entryUserEmail: email,
+        entryName: data.new_entry_name,
+        entryDate: data.new_entry_date
+    };
+
+    let addSql = 'INSERT INTO entries SET ?';
+    db.query(addSql, entry, function (err) {
+        if (err) throw err;
+    });
+    callback();
+}
+
 module.exports = {
     login_user: login,
     signup_user: signup,
-    check_email: check
+    check_email: check,
+    add_entry: add
 }

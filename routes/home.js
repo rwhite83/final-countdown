@@ -8,11 +8,11 @@ router.get('/', function (req, res) {
     if (typeof cookieSession.userEmail === 'undefined'
         || cookieSession.userEmail == '') {
         console.log('user not logged in, forwarding to signup/login');
-        res.render('login');
+        res.render('login', { 'messageData': 'please sign in to access service' });
     }
     else {
         console.log('user logged in.  forwarding to index');
-        res.render('index');
+        res.render('index', { 'emailData': cookieSession.userEmail });
     }
 })
 

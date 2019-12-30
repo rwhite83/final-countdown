@@ -18,8 +18,8 @@ exports.login_user = (req, res) => {
 exports.signup_user = (req, res) => {
     console.log('signup user fired from user controller');
     model.check_email(req.body, function (model_response) {
-        console.log('failed to log in.  email already exists');
-        if (model_response != 0) res.redirect('/')
+        // console.log('failed to log in.  email already exists');
+        if (model_response > 0) res.render('login', { 'messageData': 'email already in use.  please try again'})
         else {
             let pw1 = req.body.password_01;
             let pw2 = req.body.password_02;
@@ -27,11 +27,11 @@ exports.signup_user = (req, res) => {
                 console.log('passwords match');
                 model.signup_user(req.body);
                 cookieSession.userEmail = req.body.email_signup
-                res.redirect('/');
+                res.render('index', { 'emailData': sessionStorage.userEmail }, { 'welcomeData':'welcome to the final countdown.  please press the button' } );
             }
             else {
                 console.log('mismatched passwords');
-                res.redirect('/');
+                res.render('login', { 'messageData':'passwords do not match, please try again' } );
             }
         }
     })
@@ -39,4 +39,7 @@ exports.signup_user = (req, res) => {
 
 exports.logout_user = (req, res) => {
     console.log('logout user fired from user controller');
+    cookieSession.userID = '';
+    cookieSession.userEmail = '';
+    res.redirect('/');
 };

@@ -2,25 +2,50 @@ extends layout
 
 block content
     include header.pug
-    p
-    h1
-        | TECHNICAL PROGRAMMING
-        br
-        | COUNT DOWNS
-    p
-    p
-    h2 HCI Quiz
-    p
-    h3
-        p#hci_quiz 00:00:00:00
-    p
-    h2 Milestone 1 Due
-    p
-    h3
-        p(id='Milestone 1 Due') 00:00:00:00
-    p
-    h2 Final Submission for Term Game Project
-    p
-    h3
-        p(id='Final Submission for Term Game Project') 00:00:00:00
-    
+
+    p #{ messageData }
+        form(method="POST" action='/entries/add_entry')
+            input(type='text' placeholder="entry name" name="new_entry_name" required="")
+            input(type='datetime-local' name="new_entry_date" required="")
+            input(type="submit" value="Add Entry")
+    h1 FINAL COUNTDOWN
+    div(id="dates_div")
+        each entry in entryList
+            div(id=entry.entryId)
+                h2 #{entry.entryName}
+                h3 00:00:00:00
+    script.
+        let working_div = document.getElementById('dates_div')
+        let node_list = working_div.childNodes
+        let length = node_list.length;
+        //console.log(node_list)
+        for (let i = 0; i < length; i++) {
+        var count_down_date = new Date(node_list[i].entryDate).getTime();
+        //console.log(node_list[i])
+        // Update the count down every 1 second
+        var x = setInterval(function () {
+        // Get todays date and time
+        var now = new Date().getTime();
+        // Find the distance between now and the count down date
+        var distance = count_down_date - now;
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        var formattedDays = ("0" + days).slice(-2);
+        var formattedHours = ("0" + hours).slice(-2);
+        var formattedMinutes = ("0" + minutes).slice(-2);
+        var formattedSeconds = ("0" + seconds).slice(-2);
+        let child_array = node_list[i].children
+        let haters = child_array[1]
+        console.log(haters)
+        haters.innerHTML = formattedDays + ":" + formattedHours + ":"
+        + formattedMinutes + ":" + formattedSeconds;
+        // If the count down is over, write some text
+        if (distance < 0) {
+        clearInterval(x);
+        window.getElementById(entry.entryName).innerHTML = "Good Luck!";
+        }
+        }, 1000);
+        }

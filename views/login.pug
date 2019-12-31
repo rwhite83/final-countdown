@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    p #{ messageData }
+    form(method="POST" action='/users/login')
+        input(type='text' placeholder="email" name="email_attempt" required="")
+        input(type='password' placeholder="password" name="password_attempt" required="")
+        input(type="submit" value="Login")
+    form(method="POST" action='/users/signup')
+        input(type='text' placeholder="email" name="email_signup" required="")
+        input(type='password' placeholder="password" name="password_01" required="")
+        input(type='password' placeholder="password" name="password_02" required="")
+        input(type="submit" value="Signup")

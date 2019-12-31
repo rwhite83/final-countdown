@@ -16,8 +16,8 @@ function login(data, callback) {
 
 function check(data, callback) {
     let user = data.email_signup;
-    let sql = 'SELECT * FROM users WHERE userEmail = "' + user + '"';
-    db.query(sql, (err, result) => {
+    let checkSql = 'SELECT * FROM users WHERE userEmail = "' + user + '"';
+    db.query(checkSql, (err, result) => {
         if (err) throw err;
         callback(result.length);
     });
@@ -52,9 +52,19 @@ function add(data, email, callback) {
     callback();
 }
 
+function get(email, callback) {
+    console.log('model fired');
+    let getSql = 'SELECT * FROM entries WHERE entryUserEmail = "' + email + '"';
+    db.query(getSql, (err, result) => {
+        if (err) throw err;
+        else callback(result);
+    });
+}
+
 module.exports = {
     login_user: login,
     signup_user: signup,
     check_email: check,
-    add_entry: add
+    add_entry: add,
+    get_entries: get
 }

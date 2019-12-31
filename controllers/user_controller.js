@@ -18,7 +18,6 @@ exports.login_user = (req, res) => {
 exports.signup_user = (req, res) => {
     console.log('signup user fired from user controller');
     model.check_email(req.body, function (model_response) {
-        // console.log('failed to log in.  email already exists');
         if (model_response > 0) res.render('login', { 'messageData': 'email already in use.  please try again'})
         else {
             let pw1 = req.body.password_01;

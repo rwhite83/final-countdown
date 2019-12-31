@@ -8,3 +8,11 @@ exports.add_entry = (req, res) => {
         res.redirect('/');
     })
 };
+
+exports.get_user_entries = (callback) => {
+    console.log('get user entries fired from task controller');
+    let email = cookieSession.userEmail;
+    model.get_entries(email, function(model_response) {
+        callback(model_response);
+    })
+};

@@ -1,0 +1,156 @@
+head
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  title FINAL COUNTDOWN!
+  style.
+    @font-face {
+    font-family: 'digital-clock-font';
+    src: url(font/alarm-clock.ttf);
+    }
+    body {
+    background-color: black
+    }
+    p {
+    color: red;
+    text-align: center;
+    }
+    h1 {
+    color: white;
+    text-align: center;
+    font-size: 600%;
+    }
+    h2 {
+    color: lightseagreen;
+    text-align: center;
+    font-size: 200%;
+    }
+    h3 {
+    color: red;
+    text-align: center;
+    font-size: 600%;
+    font-family: 'digital-clock-font';
+    }
+    div {
+    text-align: center;
+    }
+audio#my_audio(src='https://firebasestorage.googleapis.com/v0/b/wrosswhite-website.appspot.com/o/clock_tick.mp3?alt=media&token=95d871eb-023d-4930-83af-1c9a642a3b5a' loop='loop')
+p
+h1
+  | TECHNICAL PROGRAMMING
+  br
+  | COUNT DOWNS
+p
+br
+br
+div
+  button(onclick='do_the_thing()' style='text-align: center;')
+    | Play the sound you know you should be
+    | hearing
+br
+br
+p
+h2 Stas Lab 8 Due
+p
+h3
+  p#stats_lab_8 00:00:00:00
+p
+h2 Stas Lab 9 Due
+p
+h3
+  p#stats_lab_9 00:00:00:00
+p
+h2 Stas Quiz 6
+p
+h3
+  p#stats_quiz_6 00:00:00:00
+p
+h2 Floral Panic Presentation
+p
+h3
+  p#druids_presentation 00:00:00:00
+p
+h2 F.I.O.N.A. Presentation
+p
+h3
+  p#fiona_presentation 00:00:00:00
+p
+h2 F.I.O.N.A. Minutes Due
+p
+h3
+  p#fiona_minutes 00:00:00:00
+p
+h2 End Of Classes
+p
+h3
+  p#class_end(style='color: green; font-size: 150%;') 00:00:00:00
+p
+h2 Stas Lab 10 Due
+p
+h3
+  p#stats_lab_10 00:00:00:00
+p
+h2 F.I.O.N.A. Evaluation
+p
+h3
+  p#fiona_evaluation 00:00:00:00
+p
+h2 F.I.O.N.A. High Fidelity Prototype Due
+p
+h3
+  p#fiona_high 00:00:00:00
+p
+h2 End of CST Program
+p
+h3
+  p#cst_end(style='color: green; font-size: 150%;')
+    | 00:00:00:00
+//
+  Template:
+  <p>
+  <h2>Event Name</h2>
+  </p>
+  <h3>
+  <p id="event_id">00:00:00:00</p>
+  </h3>
+script.
+  function countdown(date, name) {
+  // Set the date we're counting down to
+  var countDownDate1 = new Date(date).getTime();
+  // Update the count down every 1 second
+  var x = setInterval(function () {
+  // Get todays date and time
+  var now = new Date().getTime();
+  // Find the distance between now and the count down date
+  var distance = countDownDate1 - now;
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  var formattedDays = ("0" + days).slice(-2);
+  var formattedHours = ("0" + hours).slice(-2);
+  var formattedMinutes = ("0" + minutes).slice(-2);
+  var formattedSeconds = ("0" + seconds).slice(-2);
+  // Output the result in an element with id="demo"
+  document.getElementById(name).innerHTML = formattedDays + ":" + formattedHours + ":"
+  + formattedMinutes + ":" + formattedSeconds;
+  // If the count down is over, write some text
+  if (distance < 0) {
+  clearInterval(x);
+  document.getElementById(name).innerHTML = "Good Luck!";
+  }
+  }, 1000);
+  }
+  countdown("Nov 26, 2019 08:30:00", "stats_lab_8")
+  countdown("Dec 03, 2019 08:30:00", "stats_lab_9")
+  countdown("Dec 06, 2019 12:30:00", "stats_quiz_6")
+  countdown("Dec 04, 2019 23:30:59", "druids_presentation")
+  countdown("Dec 05, 2019 14:30:00", "fiona_presentation")
+  countdown("Dec 06, 2019 23:30:59", "fiona_minutes")
+  countdown("Dec 06, 2019 14:30:00", "class_end")
+  countdown("Dec 08, 2019 10:30:59", "stats_lab_10")
+  countdown("Dec 10, 2019 23:30:59", "fiona_evaluation")
+  countdown("Dec 10, 2019 23:30:59", "fiona_high")
+  countdown("Dec 12, 2019 18:30:00", "cst_end")
+  function do_the_thing() {
+  document.getElementById("my_audio").play();
+  }

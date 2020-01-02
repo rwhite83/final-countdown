@@ -4,10 +4,10 @@ const router = express.Router();
 const cookieSession = require('cookie-session');
 
 router.get('/', function (req, res) {
-    let sessionEmail = cookieSession.userEmail;
+    let sessionEmail = req.session.userEmail;
     console.log('session id in home.js: ' + sessionEmail);
-    if (typeof cookieSession.userEmail === 'undefined'
-        || cookieSession.userEmail == '') {
+    if (typeof req.session.userEmail === 'undefined'
+        || req.session.userEmail == '' || req.session.userEmail == {}) {
         console.log('user not logged in, forwarding to signup/login');
         res.render('login', { 'messageData': 'please sign in to access service' });
     }
@@ -21,17 +21,3 @@ router.get('/', function (req, res) {
 })
 
 module.exports = router;
-
-/*
-const user_controller = require('../controllers/user_controller');
-const express = require('express');
-const router = express.Router();
-
-router.post('/login', user_controller.login_user);
-
-router.post('/logout', user_controller.logout_user);
-
-router.post('/signup', user_controller.signup_user);
-
-module.exports = router;
-*/

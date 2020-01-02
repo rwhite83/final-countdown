@@ -9,7 +9,7 @@ exports.login_user = (req, res) => {
         let userPw = model_response[0].userPassword;
         if (userPw.localeCompare(password) != 0) console.log('inalid password');
         else {
-            cookieSession.userEmail = model_response[0].userEmail;
+            req.session.userEmail = model_response[0].userEmail;
             res.redirect('/');
         }
     })
@@ -25,7 +25,7 @@ exports.signup_user = (req, res) => {
             if (pw1.localeCompare(pw2) == 0) {
                 console.log('passwords match');
                 model.signup_user(req.body);
-                cookieSession.userEmail = req.body.email_signup
+                req.session.userEmail = req.body.email_signup
                 res.render('index', { 'emailData': sessionStorage.userEmail }, { 'welcomeData':'welcome to the final countdown.  please press the button' } );
             }
             else {
@@ -38,7 +38,6 @@ exports.signup_user = (req, res) => {
 
 exports.logout_user = (req, res) => {
     console.log('logout user fired from user controller');
-    cookieSession.userID = '';
-    cookieSession.userEmail = '';
+    req.session.userEmail = '';
     res.redirect('/');
 };

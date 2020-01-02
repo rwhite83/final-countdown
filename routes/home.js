@@ -4,16 +4,15 @@ const router = express.Router();
 const cookieSession = require('cookie-session');
 
 router.get('/', function (req, res) {
-    let sessionEmail = cookieSession.userEmail;
+    let sessionEmail = req.session.userEmail;
     console.log('session id in home.js: ' + sessionEmail);
-    if (typeof cookieSession.userEmail === 'undefined'
-        || cookieSession.userEmail == '') {
+    if (typeof req.session.userEmail === 'undefined'
+        || req.session.userEmail == '' || req.session.userEmail == {}) {
         console.log('user not logged in, forwarding to signup/login');
         res.render('login', { 'messageData': 'please sign in to access service' });
     }
     else {
         console.log('user logged in.  forwarding to index');
-        // b()
         entry_controller.get_user_entries( function(entry_data) {
             console.log(entry_data);
             res.render('index', { 'entryList': entry_data, 'emailData': cookieSession.userEmail, 'messageData':'welcome to the final countdown.  please press the button' } );

@@ -54,7 +54,7 @@ function add(data, email, callback) {
 
 function get(email, callback) {
     console.log('model fired');
-    let getSql = 'SELECT * FROM entries WHERE entryUserEmail = "' + email + '"';
+    let getSql = 'SELECT * FROM entries WHERE entryUserEmail = "' + email + '" ORDER BY entryDate DESC';
     db.query(getSql, (err, result) => {
         if (err) throw err;
         else callback(result);

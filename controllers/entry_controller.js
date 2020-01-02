@@ -13,6 +13,10 @@ exports.get_user_entries = (callback) => {
     console.log('get user entries fired from task controller');
     let email = cookieSession.userEmail;
     model.get_entries(email, function(model_response) {
+        // const response_handler = model_response;
+        // response_handler.forEach(entry => {
+        //     let entry_div = "<div>";
+        // })
         callback(model_response);
     })
 };

@@ -1,5 +1,9 @@
 function a() {
-    alert('script fired');
+}
+
+function b() {
+
+    alert('script b fired');
 }
 
 // alert('script fired');

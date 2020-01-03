@@ -17,7 +17,7 @@ exports.login_user = (req, res) => {
 
 exports.signup_user = (req, res) => {
     console.log('signup user fired from user controller');
-    model.check_email(req.body, function (model_response) {
+    model.check_email(req.body, function(model_response) {
         if (model_response > 0) res.render('login', { 'messageData': 'Email Already In Use.  Please Try Again'})
         else {
             let pw1 = req.body.password_01;
@@ -26,7 +26,8 @@ exports.signup_user = (req, res) => {
                 console.log('passwords match');
                 model.signup_user(req.body);
                 req.session.userEmail = req.body.email_signup
-                res.render('index', { 'emailData': req.session.userEmail }, { 'welcomeData':'Welcome to the Final Countdown.  Please Press the Button' } );
+                console.log(req.session.userEmail + "      " + req.body.email_signup)
+                res.render('index', { 'emailData': req.session.userEmail, 'welcomeData':'Welcome to the Final Countdown.  Please Press the Button', 'entryList':'' } );
             }
             else {
                 console.log('mismatched passwords');

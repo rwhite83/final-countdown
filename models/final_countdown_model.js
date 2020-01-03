@@ -15,6 +15,7 @@ function login(data, callback) {
 }
 
 function check(data, callback) {
+    console.log('check fired')
     let user = data.email_signup;
     let checkSql = 'SELECT * FROM users WHERE userEmail = "' + user + '"';
     db.query(checkSql, (err, result) => {
@@ -24,6 +25,7 @@ function check(data, callback) {
 }
 
 function signup(data) {
+    console.log('signup fired')
     let user = {
         userId: null,
         userEmail: data.email_signup,

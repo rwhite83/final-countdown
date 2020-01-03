@@ -27,7 +27,7 @@ exports.signup_user = (req, res) => {
                 model.signup_user(req.body);
                 req.session.userEmail = req.body.email_signup
                 console.log(req.session.userEmail + "      " + req.body.email_signup)
-                res.render('index', { 'emailData': req.session.userEmail, 'welcomeData':'Welcome to the Final Countdown.  Please Press the Button', 'entryList':'' } );
+                res.render('index', { 'emailData': req.session.userEmail, 'messageData':'Welcome to the Final Countdown.  Please Press the Button', 'entryList':'' } );
             }
             else {
                 console.log('mismatched passwords');

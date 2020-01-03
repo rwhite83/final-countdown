@@ -7,7 +7,7 @@ exports.login_user = (req, res) => {
     console.log(req.body);
     model.login_user(req.body, function (model_response) {
         let userPw = model_response[0].userPassword;
-        if (userPw.localeCompare(password) != 0) console.log('inalid password');
+        if (userPw.localeCompare(password) != 0) console.log('invalid password');
         else {
             req.session.userEmail = model_response[0].userEmail;
             res.redirect('/');
@@ -18,7 +18,7 @@ exports.login_user = (req, res) => {
 exports.signup_user = (req, res) => {
     console.log('signup user fired from user controller');
     model.check_email(req.body, function (model_response) {
-        if (model_response > 0) res.render('login', { 'messageData': 'email already in use.  please try again'})
+        if (model_response > 0) res.render('login', { 'messageData': 'Email Already In Use.  Please Try Again'})
         else {
             let pw1 = req.body.password_01;
             let pw2 = req.body.password_02;
@@ -26,11 +26,11 @@ exports.signup_user = (req, res) => {
                 console.log('passwords match');
                 model.signup_user(req.body);
                 req.session.userEmail = req.body.email_signup
-                res.render('index', { 'emailData': sessionStorage.userEmail }, { 'welcomeData':'welcome to the final countdown.  please press the button' } );
+                res.render('index', { 'emailData': req.session.userEmail }, { 'welcomeData':'Welcome to the Final Countdown.  Please Press the Button' } );
             }
             else {
                 console.log('mismatched passwords');
-                res.render('login', { 'messageData':'passwords do not match, please try again' } );
+                res.render('login', { 'messageData':'Passwords Do Not Match, Please Try Again' } );
             }
         }
     })

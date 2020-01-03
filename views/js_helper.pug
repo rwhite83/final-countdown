@@ -29,3 +29,24 @@ script.
     sub_node_list = node.childNodes;
     a(node);
     }
+
+script.
+    function toggle_new_task() {
+    let new_task_div = document.getElementById('new_task_div')
+    if (new_task_div.style.display != "inline") {
+    new_task_div.style.display = "inline";
+    } else {
+    new_task_div.style.display = "none";
+    }
+    }
+
+script.
+    function play_the_sound() {
+    let audio_elem = document.getElementById("my_audio");
+    if (audio_elem.paused) {
+    audio_elem.play();
+    } else {
+    audio_elem.pause();
+    audio_elem.currentTime = 0;
+    }
+    }

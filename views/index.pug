@@ -1,19 +1,33 @@
 extends layout
 
 block content
-    include header.pug
 
-    p #{ messageData }
-        form(method="POST" action='/entries/add_entry')
-            input(type='text' placeholder="entry name" name="new_entry_name" required="")
-            input(type='datetime-local' name="new_entry_date" required="")
-            input(type="submit" value="Add Entry")
+    audio(id="my_audio" src="https://firebasestorage.googleapis.com/v0/b/wrosswhite-website.appspot.com/o/clock_tick.mp3?alt=media&token=95d871eb-023d-4930-83af-1c9a642a3b5a" loop="loop")
+    div
+        h5 #{ messageData }
+        button(onclick="play_the_sound()").standard_button.btn-secondary Play/Pause the Sound
+    br
+
     h1 FINAL COUNTDOWN
+    
+    br
+    button(onclick="toggle_new_task()").btn-secondary.standard_button Add New Task
+    form#new_task_div.standard_form(method="POST" action='/entries/add_entry')
+        h2 Add a New Task
+        br
+        input(type='text' placeholder="entry name" name="new_entry_name" required="").standard_input.new_task_input
+        br
+        input(type='datetime-local' name="new_entry_date" required="").standard_input
+        br
+        input(type="submit" value="Add Entry").btn-secondary.standard_button
+    
     div(id="dates_div")
         each entry in entryList
-            div(id=entry.entryId)
+            div(id=entry.entryId).task_div
                 h2 #{ entry.entryName }
                 h3 00:00:00:00
-                h3(style="display: none") #{ entry.entryDate } 
+                h3.hidden #{ entry.entryDate } 
 
-    include countdown.pug
+    include js_helper.pug
+
+    include footer.pug

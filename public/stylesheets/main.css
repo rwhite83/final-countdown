@@ -30,3 +30,29 @@ h3 {
 h4 {
     color: white
 }
+
+.standard_input {
+    display: block;
+    margin: auto;
+}
+
+.standard_button {
+    display: block;
+    margin: auto;
+}
+
+.standard_form {
+    display: block;
+    margin: auto;
+    margin: 5%;
+}
+
+.user_message {
+    text-align: center;
+}
+
+
+label {
+    margin-bottom: 50px;
+    display: block;
+}

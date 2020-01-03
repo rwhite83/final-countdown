@@ -1,14 +1,31 @@
 extends layout
 
 block content
-    p #{ messageData }
-    form(method="POST" action='/users/login')
-        input(type='text' placeholder="email" name="email_attempt" required="")
-        input(type='password' placeholder="password" name="password_attempt" required="")
-        input(type="submit" value="Login")
-    form(method="POST" action='/users/signup')
-        input(type='text' placeholder="email" name="email_signup" required="")
-        input(type='password' placeholder="password" name="password_01" required="")
-        input(type='password' placeholder="password" name="password_02" required="")
-        input(type="submit" value="Signup")
-    h4 ***this is a work in progress.  be advised your passwords are not yet hashed, do not use a secure password
+    h1 Welcome to<br>Final Countdown
+    h2 #{ messageData }
+    form(method="POST" action='/users/login').standard_form
+        label.standard_input
+            input(type='text' placeholder="email" name="email_attempt" required="").standard_input
+        br
+        label.standard_input
+            input(type='password' placeholder="password" name="password_attempt" required="").standard_input
+        br
+        label.standard_button
+            input(type="submit" value="Login").standard_button.btn-secondary
+    form(method="POST" action='/users/signup').standard_form
+        label.standard_input
+            input(type='text' placeholder="email" name="email_signup" required="").standard_input
+        br
+        label.standard_input
+            input(type='password' placeholder="password" name="password_01" required="").standard_input
+        br
+        label.standard_input
+            input(type='password' placeholder="password" name="password_02" required="").standard_input
+        br
+        label.standard_button
+            input(type="submit" value="Signup").standard_button.btn-secondary
+        br
+        br
+        h4.user_message ***this is a work in progress.
+        h4.user_message be advised your passwords are not yet hashed, 
+        h4.user_message so please don't use a secure password

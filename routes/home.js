@@ -9,13 +9,13 @@ router.get('/', function (req, res) {
     if (typeof req.session.userEmail === 'undefined'
         || req.session.userEmail == '' || req.session.userEmail == {}) {
         console.log('user not logged in, forwarding to signup/login');
-        res.render('login', { 'messageData': 'please sign in to access service' });
+        res.render('login', { 'messageData': 'Please sign up or log in to get started!' });
     }
     else {
         console.log('user logged in.  forwarding to index');
-        entry_controller.get_user_entries( function(entry_data) {
+        entry_controller.get_user_entries(req, function(entry_data) {
             console.log(entry_data);
-            res.render('index', { 'entryList': entry_data, 'emailData': cookieSession.userEmail, 'messageData':'welcome to the final countdown.  please press the button' } );
+            res.render('index', { 'entryList': entry_data, 'emailData': req.session.userEmail, 'messageData':'welcome to the final countdown.  please press the button' } );
         });
     }
 })

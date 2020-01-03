@@ -3,27 +3,20 @@ extends layout
 block content
     h1 Welcome to<br>Final Countdown
     h2 #{ messageData }
-    form(method="POST" action='/users/login').standard_form
-        label.standard_input
-            input(type='text' placeholder="email" name="email_attempt" required="").standard_input
+    form(method="POST" action='/users/login').login_form
+        input(type='text' placeholder="email" name="email_attempt" required="").standard_input
         br
-        label.standard_input
-            input(type='password' placeholder="password" name="password_attempt" required="").standard_input
+        input(type='password' placeholder="password" name="password_attempt" required="").standard_input
         br
-        label.standard_button
-            input(type="submit" value="Login").standard_button.btn-secondary
-    form(method="POST" action='/users/signup').standard_form
-        label.standard_input
-            input(type='text' placeholder="email" name="email_signup" required="").standard_input
+        input(type="submit" value="Login").standard_button.btn-secondary
+    form(method="POST" action='/users/signup').login_form
+        input(type='text' placeholder="email" name="email_signup" required="").standard_input
         br
-        label.standard_input
-            input(type='password' placeholder="password" name="password_01" required="").standard_input
+        input(type='password' placeholder="password" name="password_01" required="").standard_input
         br
-        label.standard_input
-            input(type='password' placeholder="password" name="password_02" required="").standard_input
+        input(type='password' placeholder="password" name="password_02" required="").standard_input
         br
-        label.standard_button
-            input(type="submit" value="Signup").standard_button.btn-secondary
+        input(type="submit" value="Signup").standard_button.btn-secondary
         br
         br
         h4.user_message ***this is a work in progress.

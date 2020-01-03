@@ -15,7 +15,7 @@ router.get('/', function (req, res) {
         console.log('user logged in.  forwarding to index');
         entry_controller.get_user_entries(req, function(entry_data) {
             console.log(entry_data);
-            res.render('index', { 'entryList': entry_data, 'emailData': req.session.userEmail, 'messageData':'welcome to the final countdown.  please press the button' } );
+            res.render('index', { 'entryList': entry_data, 'emailData': req.session.userEmail, 'messageData':'Welcome to the Final Countdown.  Please Press the Button' } );
         });
     }
 })

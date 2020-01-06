@@ -44,7 +44,7 @@ function add(data, email, callback) {
         entryId: null,
         entryUserEmail: email,
         entryName: data.new_entry_name,
-        entryDate: data.new_entry_date
+        entryDate: data.new_entry_date + "T" + data.new_entry_time
     };
 
     let addSql = 'INSERT INTO entries SET ?';
@@ -56,7 +56,7 @@ function add(data, email, callback) {
 
 function get(email, callback) {
     console.log('model fired');
-    let getSql = 'SELECT * FROM entries WHERE entryUserEmail = "' + email + '" ORDER BY entryDate DESC';
+    let getSql = 'SELECT * FROM entries WHERE entryUserEmail = "' + email + '" ORDER BY entryDate ASC';
     db.query(getSql, (err, result) => {
         if (err) throw err;
         else callback(result);

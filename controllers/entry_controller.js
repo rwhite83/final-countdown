@@ -5,6 +5,8 @@ exports.add_entry = (req, res) => {
     let email = req.session.userEmail;
     console.log('add task fired from task controller');
     model.add_entry(req.body, email, function () {
+        console.log(req.body.new_entry_datetime)
+        //console.log(req.body.new_entry_date + "T" + req.body.new_entry_time)
         res.redirect('/');
     })
 };

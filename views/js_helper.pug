@@ -5,7 +5,7 @@ script.
     let processed_count_down_date = time_sanitizer(count_down_date);
     var x = setInterval(function () {
     let now = new Date();
-    let distance = new Date(count_down_date - now);
+    let distance = new Date(processed_count_down_date - now);
     //- console.log('then: ' + count_down_date + ' now: ' + now + ' distance: ' + distance)
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));

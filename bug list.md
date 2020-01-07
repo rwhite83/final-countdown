@@ -1,0 +1,1 @@
+crash if log in with no db credentials

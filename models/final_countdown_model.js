@@ -44,7 +44,7 @@ function add(data, email, callback) {
         entryId: null,
         entryUserEmail: email,
         entryName: data.new_entry_name,
-        entryDate: data.new_entry_date + "T" + data.new_entry_time
+        entryDate: data.new_entry_date + " " + data.new_entry_time
     };
 
     let addSql = 'INSERT INTO entries SET ?';
@@ -60,6 +60,7 @@ function get(email, callback) {
     db.query(getSql, (err, result) => {
         if (err) throw err;
         else callback(result);
+        // else console.log(result)
     });
 }
 

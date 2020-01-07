@@ -26,6 +26,17 @@ script.
     }
     
 script.
+    function time_sanitizer(date) {
+    var targetDate = new Date(model_response[0].entryDate)
+    console.log('entries1 ' + targetDate)
+    let correction = targetDate.getTimezoneOffset()
+    targetDate.setMinutes(targetDate.getMinutes() + targetDate.getTimezoneOffset())
+    console.log('entries2 ' + targetDate)
+    }
+    }
+
+
+script.
     let dates_div = document.getElementById('dates_div');
     let node_list = dates_div.childNodes;
     for (node of node_list) {

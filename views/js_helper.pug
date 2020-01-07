@@ -1,8 +1,8 @@
 script.
-    function a(div) {
+    function time_processor(div) {
     let node_list = div.childNodes;
     var count_down_date = new Date(node_list[2].innerHTML);
-    let processed_count_down_date = time_sanitizer(count_down_date);
+    let processed_count_down_date = time_zone_corrector(count_down_date);
     var x = setInterval(function () {
     let now = new Date();
     let distance = new Date(processed_count_down_date - now);
@@ -27,23 +27,19 @@ script.
     }
     
 script.
-    function time_sanitizer(target) {
+    function time_zone_corrector(target) {
     var targetDate = new Date(target)
-    console.log('entries1 ' + targetDate)
     let correction = targetDate.getTimezoneOffset()
     targetDate.setMinutes(targetDate.getMinutes() + targetDate.getTimezoneOffset())
-    console.log('entries2 ' + targetDate)
     return targetDate;
     }
     
-
-
 script.
     let dates_div = document.getElementById('dates_div');
     let node_list = dates_div.childNodes;
     for (node of node_list) {
     sub_node_list = node.childNodes;
-    a(node);
+    time_processor(node);
     }
 
 script.

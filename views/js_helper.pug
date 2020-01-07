@@ -2,9 +2,9 @@ script.
     function a(div) {
     let node_list = div.childNodes;
     var count_down_date = new Date(node_list[2].innerHTML);
+    let processed_count_down_date = time_sanitizer(count_down_date);
     var x = setInterval(function () {
     let now = new Date();
-    time_sanitizer(count_down_date)
     let distance = new Date(count_down_date - now);
     //- console.log('then: ' + count_down_date + ' now: ' + now + ' distance: ' + distance)
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -33,6 +33,7 @@ script.
     let correction = targetDate.getTimezoneOffset()
     targetDate.setMinutes(targetDate.getMinutes() + targetDate.getTimezoneOffset())
     console.log('entries2 ' + targetDate)
+    return targetDate;
     }
     
 

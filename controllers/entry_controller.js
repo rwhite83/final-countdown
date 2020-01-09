@@ -14,11 +14,10 @@ exports.get_user_entries = (req, callback) => {
     console.log('get user entries fired from task controller');
     let email = req.session.userEmail;
     model.get_entries(email, function(model_response) {
-        // var targetDate = new Date(model_response[0].entryDate)
-        // console.log('entries1 ' + targetDate)
-        // let correction = targetDate.getTimezoneOffset()
-        // targetDate.setMinutes(targetDate.getMinutes() + targetDate.getTimezoneOffset())
-        // console.log('entries2 ' + targetDate)
+        for(let i =  0; i < model_response.length; i++) {
+            let stripped_date = model_response[i].entryDate.toString().slice(0, 21);
+            model_response[i].strippedDate = stripped_date
+        }
         callback(model_response);
     })
 };

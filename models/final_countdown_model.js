@@ -6,8 +6,10 @@ function login(data, callback) {
     let email = data.email_attempt;
     let password = data.password_attempt;
     console.log('email attempt: ' + email + " password attempt: " + password);
-    let loginSql = "SELECT * FROM users WHERE userEmail = '" + email + "'";
-    db.query(loginSql, (err, result) => {
+    let sql_statement = "SELECT * FROM users WHERE userEmail = ?";
+    let sql_params = [email];
+    statement = db.format(sql_statement, sql_params);
+    db.query(statement, (err, result) => {
         if (err) throw err;
         console.log('result in query :' + result[0].userEmail);
         callback(result);
@@ -17,8 +19,10 @@ function login(data, callback) {
 function check(data, callback) {
     console.log('check fired')
     let user = data.email_signup;
-    let checkSql = 'SELECT * FROM users WHERE userEmail = "' + user + '"';
-    db.query(checkSql, (err, result) => {
+    let sql_statement = 'SELECT * FROM users WHERE userEmail = ?';
+    let sql_params = [user];
+    statement = db.format(sql_statement, sql_params);
+    db.query(statement, (err, result) => {
         if (err) throw err;
         callback(result.length);
     });
@@ -31,9 +35,10 @@ function signup(data) {
         userEmail: data.email_signup,
         userPassword: data.password_01
     };
-
-    let signupSql = 'INSERT INTO users SET ?';
-    db.query(signupSql, user, function (err) {
+    let sql_statement = 'INSERT INTO users SET ?';
+    let sql_params = [user];
+    statement = db.format(sql_statement, sql_params);
+    db.query(statement, function (err) {
         if (err) throw err;
     });
 }
@@ -46,9 +51,10 @@ function add(data, email, callback) {
         entryName: data.new_entry_name,
         entryDate: data.new_entry_date + " " + data.new_entry_time
     };
-
-    let addSql = 'INSERT INTO entries SET ?';
-    db.query(addSql, entry, function (err) {
+    let sql_statement = 'INSERT INTO entries SET ?';
+    let sql_params = [entry];
+    statement = db.format(sql_statement, sql_params);
+    db.query(statement, function (err) {
         if (err) throw err;
     });
     callback();
@@ -56,11 +62,12 @@ function add(data, email, callback) {
 
 function get(email, callback) {
     console.log('model fired');
-    let getSql = 'SELECT * FROM entries WHERE entryUserEmail = "' + email + '" ORDER BY entryDate ASC';
-    db.query(getSql, (err, result) => {
+    let sql_statement = 'SELECT * FROM entries WHERE entryUserEmail = ? ORDER BY entryDate ASC';
+    let sql_params = [email];
+    statement = db.format(sql_statement, sql_params);
+    db.query(statement, (err, result) => {
         if (err) throw err;
         else callback(result);
-        // else console.log(result)
     });
 }
 

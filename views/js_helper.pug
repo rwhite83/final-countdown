@@ -70,7 +70,12 @@ script.
     console.log(entry_name);   
     fetch('/entries/delete_entry', {
     method: "POST",
+    redirect: 'follow',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ "message": entry_name })
+
+    })
+        .then(response => {
+        location.reload();
     }) 
     }

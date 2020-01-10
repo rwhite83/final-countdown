@@ -18,13 +18,14 @@ h1 {
 h2 {
     color: lightseagreen;
     text-align: center;
-    font-size: 200%;
+    font-size: 325%;
 }
 h3 {
     color: red;
     text-align: center;
     font-size: 600%;
     font-family: 'digital-clock-font';
+    margin-bottom: 0pt;
 }
 
 h4 {
@@ -34,6 +35,8 @@ h4 {
 h5 {
     color: darkgray;
     text-align: center;
+    margin-bottom: 15pt;
+    margin-top: 0pt;
 }
 
 .standard_input {
@@ -80,6 +83,7 @@ label {
 
 #headerDiv {
     color: white;
+    margin-bottom: 7pt;
 }
 
 #new_task_div {

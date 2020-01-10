@@ -18,7 +18,7 @@ block content
         input(type='text' placeholder="entry name" name="new_entry_name" required="").standard_input.new_task_input
         br
         .parent
-            input.child(type='date' placeholder="mm/dd/yyyy" value="mm/dd//yyyy" name='new_entry_date' required="").standard_input
+            input.child(type='date' placeholder="yyyy-mm-dd" value="mm/dd//yyyy" name='new_entry_date' required="").standard_input
             input.child(type='time' placeholder="00:00:AM" value='00:00' name="new_entry_time" required="").standard_input
         br
         input(type="submit" value="Add Entry").btn-secondary.standard_button
@@ -28,7 +28,10 @@ block content
             div(id=entry.entryId).task_div
                 h2 #{ entry.entryName }
                 h3 00:00:00:00
-                h3.hidden #{ entry.entryDate } 
+                h5 #{ entry.strippedDate }
+                h3.hidden #{ entry.entryDate }
+                button(onclick="delete_entry(this)").standard_button.btn-secondary Delete
+                p.hidden #{ entry.entryId }
 
     include js_helper.pug
 

@@ -3,9 +3,18 @@ const cookieSession = require('cookie-session');
 
 exports.add_entry = (req, res) => {
     let email = req.session.userEmail;
-    console.log('add task fired from task controller');
+    console.log('delete task fired from task controller');
     model.add_entry(req.body, email, function () {
         console.log(req.body.new_entry_datetime)
+        res.redirect('/');
+    })
+};
+
+exports.delete_entry = (req, res) => {
+    console.log('delete entry fired from task controller');
+    console.log(req.body.message)
+    model.delete_entry(req.body.message, function () {
+        console.log('heard back from database for deletion')
         res.redirect('/');
     })
 };

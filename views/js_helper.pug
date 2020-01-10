@@ -62,3 +62,15 @@ script.
     audio_elem.currentTime = 0;
     }
     }
+
+script.
+    function delete_entry(button) {
+    console.log(button.parentNode)   
+    let entry_name = button.parentNode.lastChild.innerText;   
+    console.log(entry_name);   
+    fetch('/entries/delete_entry', {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ "message": entry_name })
+    }) 
+    }

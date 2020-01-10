@@ -60,6 +60,17 @@ function add(data, email, callback) {
     callback();
 }
 
+function delete_one(data, callback) {
+    console.log(data)
+    let sql_statement = 'DELETE FROM entries WHERE entryId = ?';
+    let sql_params = [data];
+    statement = db.format(sql_statement, sql_params);
+        db.query(statement, function (err) {
+        if (err) throw err;
+    });
+    callback();
+}
+
 function get(email, callback) {
     console.log('model fired');
     let sql_statement = 'SELECT * FROM entries WHERE entryUserEmail = ? ORDER BY entryDate ASC';
@@ -76,5 +87,6 @@ module.exports = {
     signup_user: signup,
     check_email: check,
     add_entry: add,
+    delete_entry: delete_one,
     get_entries: get
 }

@@ -30,7 +30,8 @@ block content
                 h3 00:00:00:00
                 h5 #{ entry.strippedDate }
                 h3.hidden #{ entry.entryDate }
-                button.standard_button.btn-secondary Delete
+                button(onclick="delete_entry(this)").standard_button.btn-secondary Delete
+                p.hidden #{ entry.entryId }
 
     include js_helper.pug
 

@@ -1,17 +1,16 @@
 const db = require('../utilities/final_countdown_db_access');
 const cookieSession = require('cookie-session');
+const bcrypt = require('bcryptjs')
 
 function login(data, callback) {
     console.log('login fired from model');
     let email = data.email_attempt;
     let password = data.password_attempt;
-    console.log('email attempt: ' + email + " password attempt: " + password);
     let sql_statement = "SELECT * FROM users WHERE userEmail = ?";
     let sql_params = [email];
     statement = db.format(sql_statement, sql_params);
     db.query(statement, (err, result) => {
         if (err) throw err;
-        console.log('result in query :' + result[0].userEmail);
         callback(result);
     });
 }
@@ -30,17 +29,22 @@ function check(data, callback) {
 
 function signup(data) {
     console.log('signup fired')
-    let user = {
-        userId: null,
-        userEmail: data.email_signup,
-        userPassword: data.password_01
-    };
-    let sql_statement = 'INSERT INTO users SET ?';
-    let sql_params = [user];
-    statement = db.format(sql_statement, sql_params);
-    db.query(statement, function (err) {
-        if (err) throw err;
-    });
+    bcrypt.genSalt(10, function (err, salt) {
+        bcrypt.hash(data.password_01, salt, function (err, hash) {
+            let user = {
+                userId: null,
+                userEmail: data.email_signup,
+                userPassword: hash
+            };
+            let sql_statement = 'INSERT INTO users SET ?';
+            let sql_params = [user];
+            statement = db.format(sql_statement, sql_params);
+            db.query(statement, function (err) {
+                if (err) throw err;
+            });
+        })
+
+    })
 }
 
 function add(data, email, callback) {
@@ -65,7 +69,7 @@ function delete_one(data, callback) {
     let sql_statement = 'DELETE FROM entries WHERE entryId = ?';
     let sql_params = [data];
     statement = db.format(sql_statement, sql_params);
-        db.query(statement, function (err) {
+    db.query(statement, function (err) {
         if (err) throw err;
     });
     callback();
